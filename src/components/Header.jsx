@@ -11,15 +11,15 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-primary-900/80 backdrop-blur-md border-b border-accent-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-3 md:py-4">
+        <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             <img 
               src="/logo.png" 
               alt="Kellon Logo" 
-              className="w-16 h-16 md:w-20 md:h-20 object-contain"
+              className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
-            <span className="text-2xl md:text-3xl font-bold text-white">Kellon Mobile</span>
+            <span className="text-xl md:text-2xl font-bold text-white">Kellon</span>
           </div>
 
           {/* Desktop Navigation */}
