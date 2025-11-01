@@ -14,10 +14,10 @@ const About = () => {
   }
 
   const stats = [
-    { number: "2024", label: "Founded" },
-    { number: "25K+", label: "Beta Users" },
-    { number: "150+", label: "Countries" },
-    { number: "24/7", label: "Support" }
+    { number: "2025", label: "Founded" },
+    { number: "5K+", label: "Waitlist Signups" },
+    { number: "50+", label: "Target Countries" },
+    { number: "Q2 2026", label: "Launch Target" }
   ]
 
   const values = [
@@ -53,14 +53,16 @@ const About = () => {
               About <span className="gradient-text">Kellon Mobile</span>
             </h2>
             <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-              Kellon Mobile is revolutionizing the global financial landscape by eliminating borders 
-              in payments and investments. Our mission is to create a world where anyone, anywhere, 
-              can access financial services without geographical limitations or traditional banking barriers.
+              Kellon Mobile is an innovative fintech startup on a mission to revolutionize the global 
+              financial landscape by eliminating borders in payments and investments. We're building a 
+              world where anyone, anywhere, can access financial services without geographical limitations 
+              or traditional banking barriers.
             </p>
             <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-              We're building more than just a mobile wallet – we're creating a comprehensive financial 
-              ecosystem that combines borderless payments, global investment opportunities, and seamless 
-              crypto management in one unified platform that fits in your pocket.
+              Currently in development, we're creating more than just a mobile wallet – we're designing 
+              a comprehensive financial ecosystem that will combine borderless payments, global investment 
+              opportunities, and seamless crypto management in one unified platform. Join our waitlist to 
+              be among the first to experience the future of digital finance.
             </p>
             
             {/* Stats */}
@@ -82,10 +84,10 @@ const About = () => {
                   <Rocket className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-4">
-                  Join the Crypto Revolution
+                  Coming Soon
                 </h3>
                 <p className="text-gray-300 mb-6">
-                  Be part of the financial future with Kellon's innovative crypto solutions.
+                  Be among the first to experience the future of borderless financial services.
                 </p>
                 <button className="btn-primary w-full" onClick={openWaitlist}>
                   Join Waitlist
@@ -101,7 +103,7 @@ const About = () => {
             Our Core Values
           </h3>
           <p className="text-gray-300 max-w-2xl mx-auto">
-            These principles guide everything we do at Kellon, from product development to customer support.
+            As a startup, these principles are the foundation of our vision and guide our journey toward launch.
           </p>
         </div>
 
