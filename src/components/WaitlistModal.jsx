@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { X, Mail, User, ArrowRight } from 'lucide-react'
-import { waitlistService } from '../services/supabase'
+import { waitlistService, validateSupabaseConfig } from '../services/supabase'
 
 const WaitlistModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -50,7 +50,8 @@ const WaitlistModal = ({ isOpen, onClose }) => {
       
     } catch (error) {
       console.error('Error submitting waitlist form:', error)
-      setError('Unable to join waitlist. Please try again or contact support.')
+      console.error('Error details:', error.message)
+      setError(`Unable to join waitlist: ${error.message}. Please try again or contact support.`)
     } finally {
       setIsSubmitting(false)
     }
