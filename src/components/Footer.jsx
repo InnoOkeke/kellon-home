@@ -88,10 +88,10 @@ const Footer = () => {
 
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="flex justify-center">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center space-x-3 mb-4">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-3 mb-4">
               <img 
                 src="/logo.png" 
                 alt="Kellon Logo" 
@@ -99,91 +99,26 @@ const Footer = () => {
               />
               <span className="text-2xl font-bold text-white">Kellon</span>
             </div>
-            <p className="text-gray-400 mb-6 max-w-sm">
+            <p className="text-gray-400 mb-6 max-w-sm mx-auto">
               Your gateway to borderless payments and financial freedom. 
               Breaking barriers to create a world without financial limits.
             </p>
             
             {/* Contact Info */}
             <div className="space-y-3">
-              <div className="flex items-center text-gray-400">
+              <div className="flex items-center justify-center text-gray-400">
                 <Mail className="w-4 h-4 mr-3" />
                 <span>support@kellon.io</span>
               </div>
-              <div className="flex items-center text-gray-400">
+              <div className="flex items-center justify-center text-gray-400">
                 <Phone className="w-4 h-4 mr-3" />
                 <span>+1 (555) 123-4567</span>
               </div>
-              <div className="flex items-center text-gray-400">
+              <div className="flex items-center justify-center text-gray-400">
                 <MapPin className="w-4 h-4 mr-3" />
                 <span>San Francisco, CA</span>
               </div>
             </div>
-          </div>
-
-          {/* Links Columns - Hidden but preserved */}
-          <div className="hidden">
-            <h4 className="text-white font-semibold mb-4">Product</h4>
-            <ul className="space-y-2">
-              {footerLinks.product.map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="hidden">
-            <h4 className="text-white font-semibold mb-4">Company</h4>
-            <ul className="space-y-2">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="hidden">
-            <h4 className="text-white font-semibold mb-4">Support</h4>
-            <ul className="space-y-2">
-              {footerLinks.support.map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="hidden">
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
-            <ul className="space-y-2">
-              {footerLinks.legal.map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
