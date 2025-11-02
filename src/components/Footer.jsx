@@ -121,8 +121,8 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links Columns */}
-          <div>
+          {/* Links Columns - Hidden but preserved */}
+          <div className="hidden">
             <h4 className="text-white font-semibold mb-4">Product</h4>
             <ul className="space-y-2">
               {footerLinks.product.map((link) => (
@@ -138,7 +138,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="hidden">
             <h4 className="text-white font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
               {footerLinks.company.map((link) => (
@@ -154,7 +154,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="hidden">
             <h4 className="text-white font-semibold mb-4">Support</h4>
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
@@ -170,7 +170,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          <div className="hidden">
             <h4 className="text-white font-semibold mb-4">Legal</h4>
             <ul className="space-y-2">
               {footerLinks.legal.map((link) => (
