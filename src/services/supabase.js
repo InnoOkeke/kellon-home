@@ -4,30 +4,34 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
+console.log('Environment check:', {
+  url: supabaseUrl ? 'Present' : 'Missing',
+  key: supabaseKey ? 'Present' : 'Missing',
+  keyLength: supabaseKey ? supabaseKey.length : 0
+})
+
 if (!supabaseUrl || !supabaseKey) {
   console.error('Missing Supabase credentials. Check environment variables.')
-  console.error('URL:', supabaseUrl ? 'Set' : 'Missing')
-  console.error('Key:', supabaseKey ? 'Set' : 'Missing')
+  throw new Error('Supabase not configured properly')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
-
-// Validate Supabase configuration
-export const validateSupabaseConfig = () => {
-  if (!supabaseUrl || !supabaseKey) {
-    throw new Error('Supabase configuration missing. Please check environment variables.')
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
   }
-  return true
-}
+})
 
 // Waitlist service functions
 export const waitlistService = {
   // Add a new waitlist signup
   async addSignup(data) {
     try {
-      // Validate configuration before making request
-      validateSupabaseConfig()
-      
+      // Check if Supabase is properly configured
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error('Service configuration error')
+      }
+
       const { data: result, error } = await supabase
         .from('waitlist')
         .insert({
@@ -37,7 +41,16 @@ export const waitlistService = {
         .select()
       
       if (error) {
-        throw new Error(`Database error: ${error.message}`)
+        console.error('Supabase error details:', error)
+        
+        // Handle specific error types
+        if (error.message.includes('Authorization header')) {
+          throw new Error('Authentication error: Service not properly configured')
+        } else if (error.code === 'PGRST301') {
+          throw new Error('Database access denied: Check permissions')
+        } else {
+          throw new Error(`Database error: ${error.message}`)
+        }
       }
       
       return { success: true, data: result }

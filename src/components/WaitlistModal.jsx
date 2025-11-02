@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { X, Mail, User, ArrowRight } from 'lucide-react'
-import { waitlistService, validateSupabaseConfig } from '../services/supabase'
+import { waitlistService } from '../services/supabase'
 
 const WaitlistModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,20 @@ const WaitlistModal = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
+  
+  // Check if Supabase is configured when modal opens
+  React.useEffect(() => {
+    if (isOpen) {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+      
+      if (!supabaseUrl || !supabaseKey) {
+        setError('Service temporarily unavailable. Please email contact@kellon.xyz to join our waitlist.')
+      } else {
+        setError('') // Clear any previous errors
+      }
+    }
+  }, [isOpen])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -51,7 +65,17 @@ const WaitlistModal = ({ isOpen, onClose }) => {
     } catch (error) {
       console.error('Error submitting waitlist form:', error)
       console.error('Error details:', error.message)
-      setError(`Unable to join waitlist: ${error.message}. Please try again or contact support.`)
+      
+      // Handle specific error types
+      if (error.message.includes('duplicate key') || error.message.includes('unique constraint')) {
+        setError('This email is already on our waitlist! Check your inbox for previous confirmation.')
+      } else if (error.message.includes('Database error')) {
+        setError('Database temporarily unavailable. Please email us directly at contact@kellon.xyz to join the waitlist.')
+      } else if (error.message.includes('Failed to fetch') || error.message.includes('network')) {
+        setError('Connection issue detected. Please check your internet and try again, or email contact@kellon.xyz')
+      } else {
+        setError('Unable to join waitlist. Please email contact@kellon.xyz directly or try again later.')
+      }
     } finally {
       setIsSubmitting(false)
     }
