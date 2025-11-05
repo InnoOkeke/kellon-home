@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import Partners from './components/Partners'
 import Features from './components/Features'
 import MarketOpportunity from './components/MarketOpportunity'
 import Traction from './components/Traction'
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <Partners />
         <Features />
         <MarketOpportunity />
         <Traction />
