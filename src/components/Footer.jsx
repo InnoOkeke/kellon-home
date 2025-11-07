@@ -174,7 +174,7 @@ const Footer = () => {
               onClick={handleLogoClick}
             >
               <img 
-                src="/logo.png" 
+                src="/logo.png?v=20251108" 
                 alt="Kellon Logo" 
                 className="w-12 h-12 object-contain"
               />

@@ -24,7 +24,7 @@ const Header = () => {
             onClick={handleLogoClick}
           >
             <img 
-              src="/logo.png" 
+              src="/logo.png?v=20251108" 
               alt="Kellon Logo" 
               className="w-10 h-10 md:w-12 md:h-12 object-contain"
             />
