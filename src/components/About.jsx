@@ -1,136 +1,167 @@
-import React from 'react'
-import { CheckCircle, Users, Award, Rocket, ArrowRight } from 'lucide-react'
+import React from "react"
+import {
+  CheckCircle,
+  Users,
+  Rocket,
+  ArrowRight,
+  Calendar,
+  Globe,
+} from "lucide-react"
 
 const About = () => {
   const scrollToWaitlist = () => {
-    const footerElement = document.querySelector('footer')
-    if (footerElement) {
-      footerElement.scrollIntoView({ behavior: 'smooth' })
-      // Focus on the email input after scrolling
+    const footer = document.querySelector("footer")
+    if (footer) {
+      footer.scrollIntoView({ behavior: "smooth" })
       setTimeout(() => {
-        const emailInput = footerElement.querySelector('input[type="email"]')
-        if (emailInput) {
-          emailInput.focus()
-        }
+        const input = footer.querySelector('input[type="email"]')
+        input?.focus()
       }, 500)
     }
   }
 
-  const stats = [
-    { number: "2025", label: "Founded" },
-    { number: "5K+", label: "Waitlist Signups" },
-    { number: "50+", label: "Target Countries" },
-    { number: "Q2 2026", label: "Launch Target" }
+  const milestones = [
+    { icon: Calendar, number: "2025", label: "Founded" },
+    { icon: Globe, number: "50+", label: "Countries" },
   ]
 
   const values = [
     {
       icon: CheckCircle,
       title: "Security First",
-      description: "We prioritize the security of your digital assets above all else with industry-leading protection."
+      desc: "Bank-grade encryption and protection.",
     },
     {
       icon: Users,
-      title: "User-Centric",
-      description: "Every feature is designed with our users in mind, ensuring an intuitive and seamless experience."
+      title: "People Focused",
+      desc: "Built for global access and simplicity.",
     },
-    {
-      icon: Award,
-      title: "Innovation",
-      description: "We continuously innovate to bring you the latest advancements in borderless financial technology."
-    },
-    {
-      icon: Rocket,
-      title: "Growth",
-      description: "We're committed to growing the crypto ecosystem and helping users achieve financial freedom."
-    }
   ]
 
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* About Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              About <span className="gradient-text">Kellon Mobile</span>
-            </h2>
-            <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-              Kellon Mobile is an innovative fintech startup on a mission to revolutionize the global 
-              financial landscape by eliminating borders in payments and investments. We're building a 
-              world where anyone, anywhere, can access financial services without geographical limitations 
-              or traditional banking barriers.
-            </p>
-            <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-              Currently in development, we're creating more than just a mobile wallet – we're designing 
-              a comprehensive financial ecosystem that will combine borderless payments, global investment 
-              opportunities, and seamless financial management in one unified application. Join our waitlist to 
-              be among the first to experience the future of digital finance.
-            </p>
-            
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center lg:text-left">
-                  <div className="text-2xl font-bold text-white mb-1">{stat.number}</div>
-                  <div className="text-gray-400">{stat.label}</div>
+    <section
+      id="about"
+      className="relative bg-primary-900 py-24 px-4 overflow-hidden"
+    >
+      {/* Background Glow (Rebalanced) */}
+      <div className="absolute inset-0 opacity-25 pointer-events-none">
+        <div className="absolute top-48 left-16 w-60 h-60 bg-accent-500/20 blur-3xl rounded-full" />
+        <div className="absolute bottom-48 right-16 w-60 h-60 bg-primary-500/20 blur-3xl rounded-full" />
+      </div>
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent-500/20 bg-accent-500/10 mb-4">
+            <Rocket className="w-4 h-4 text-accent-300" />
+            <span className="text-sm text-accent-300">About Us</span>
+          </div>
+
+          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4 leading-tight">
+            The Future of{" "}
+            <span className="bg-gradient-to-r from-accent-400 to-primary-800 bg-clip-text text-transparent">
+              Borderless Finance
+            </span>
+          </h2>
+
+          <p className="text-gray-300 max-w-xl mx-auto text-lg">
+            We're building a global financial system that works for everyone.
+          </p>
+        </div>
+
+        {/* Two Column Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-28">
+          {/* Left Column */}
+          <div className="space-y-12">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-3">
+                Our Mission
+              </h3>
+              <p className="text-gray-300 leading-relaxed">
+                To make global financial tools accessible to anyone, anywhere,
+                without barriers or complexity.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-3">Our Vision</h3>
+              <p className="text-gray-300 leading-relaxed">
+                A single super-app for payments, investing, and wealth — all
+                borderless and instant.
+              </p>
+            </div>
+
+            {/* Milestones */}
+            <div className="grid grid-cols-2 gap-6 pt-4">
+              {milestones.map((m, i) => (
+                <div
+                  key={i}
+                  className="p-5 text-center bg-white/5 rounded-2xl border border-white/10"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-accent-500 to-primary-800 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <m.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-xl font-bold text-white">{m.number}</div>
+                  <div className="text-gray-400 text-sm">{m.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative">
-            {/* Placeholder for app mockup or illustration */}
-            <div className="bg-gradient-to-br from-primary-600/20 to-accent-600/20 rounded-3xl p-8 border border-white/10 backdrop-blur-sm">
+          {/* Right CTA */}
+          <div className="lg:sticky lg:top-28">
+            <div className="p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-xl">
               <div className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <div className="w-20 h-20 bg-gradient-to-r from-accent-500 to-primary-800 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <Rocket className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-4">
-                  Coming Soon
+
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Join the Movement
                 </h3>
+
                 <p className="text-gray-300 mb-6">
-                  Be among the first to experience the future of borderless financial services.
+                  Be part of the first users shaping the future of global
+                  finance.
                 </p>
-                <button 
-                  className="btn-primary w-full flex items-center justify-center" 
+
+                <button
                   onClick={scrollToWaitlist}
+                  className="w-full py-4 bg-gradient-to-r from-accent-500 to-primary-800 rounded-2xl text-white font-semibold flex items-center justify-center gap-3 hover:scale-105 transition-all"
                 >
-                  Join Waitlist
-                  <ArrowRight className="ml-2 w-4 h-4" />
+                  Join Waitlist <ArrowRight className="w-5 h-5" />
                 </button>
+
+                <p className="text-gray-400 text-sm mt-4">5,000+ already in</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Values Section */}
+        {/* Values */}
         <div className="text-center mb-12">
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Our Core Values
-          </h3>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            As a startup, these principles are the foundation of our vision and guide our journey toward launch.
+          <h3 className="text-3xl font-bold text-white mb-4">What Drives Us</h3>
+          <p className="text-gray-300 max-w-xl mx-auto">
+            Two core principles shape everything we build.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {values.map((value, index) => {
-            const IconComponent = value.icon
-            return (
-              <div key={index} className="card text-center">
-                <div className="w-14 h-14 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                  <IconComponent className="w-7 h-7 text-white" />
-                </div>
-                <h4 className="text-lg font-semibold text-white mb-3">
-                  {value.title}
-                </h4>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {value.description}
-                </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {values.map((v, i) => (
+            <div
+              key={i}
+              className="p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-white/20 transition-all"
+            >
+              <div className="w-14 h-14 bg-gradient-to-r from-accent-500 to-primary-800 rounded-xl flex items-center justify-center mb-4">
+                <v.icon className="w-7 h-7 text-white" />
               </div>
-            )
-          })}
+
+              <h4 className="text-lg font-semibold text-white mb-1">
+                {v.title}
+              </h4>
+              <p className="text-gray-300 text-sm">{v.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
