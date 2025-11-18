@@ -70,7 +70,7 @@ export default function Hero() {
   }
 
   return (
-    <section ref={containerRef} className="relative min-h-[200dvh]">
+    <section ref={containerRef} className="relative 2xl:min-h-[400dvh]">
       {/* Parent-level connection SVG */}
       <svg
         className="absolute w-full h-full top-0 left-0 pointer-events-none z-0"
@@ -110,7 +110,7 @@ export default function Hero() {
         />
       </svg>
 
-      <div className="sticky top-0 w-full h-screen flex justify-center items-center overflow-hidden bg-primary-900 z-10">
+      <div className="sticky top-0 w-full h-screen flex justify-center items-center overflow-hidden bg-black z-10">
         {/* 2-column layout */}
         <div className="relative flex flex-col lg:flex-row items-center justify-center w-full h-full max-w-7xl px-6 gap-12 z-20">
           {/* Left: text + CTA */}
@@ -131,12 +131,12 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center lg:justify-start">
               <button
                 onClick={scrollToWaitlist}
-                className="px-6 py-3 flex items-center justify-center gap-2 bg-gradient-to-r from-accent-400 to-primary-800 rounded-md text-white"
+                className="px-6 py-3 flex items-center justify-center gap-2 bg-gradient-to-r from-accent-400 to-primary-800 rounded-md text-white hover:from-accent-500 hover:to-primary-900 transition-all duration-300"
               >
                 Join Waitlist
                 {/* <ArrowRight className="w-5 h-5" /> */}
               </button>
-              <button className="px-6 py-3 flex items-center justify-center gap-2 border border-white rounded-md text-white">
+              <button className="px-6 py-3 flex items-center justify-center gap-2 border border-white rounded-md text-white hover:ring-2 hover:ring-accent-400 hover:ring-offset-2 hover:ring-offset-gray-900 transition-all duration-300">
                 <Play className="w-5 h-5" />
                 Watch Demo
               </button>
