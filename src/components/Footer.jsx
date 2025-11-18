@@ -1,252 +1,193 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { 
-  Wallet, 
-  Twitter, 
-  Github, 
-  Linkedin, 
-  Mail, 
-  MapPin, 
-  Phone,
-  ArrowRight,
-  Check
-} from 'lucide-react'
-import SuccessModal from './SuccessModal'
-import { waitlistService } from '../services/supabase'
+import React, { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { Mail, Twitter, Github, Linkedin, ArrowRight } from "lucide-react"
+import SuccessModal from "./SuccessModal"
+import { waitlistService } from "../services/supabase"
 
 const Footer = () => {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
-  const [error, setError] = useState('')
+  const [error, setError] = useState("")
   const navigate = useNavigate()
 
-
-
-  const handleDirectSubmit = async () => {
-    if (!email || !email.includes('@')) {
-      setError('Please enter a valid email address')
+  const handleSubmit = async () => {
+    if (!email || !email.includes("@")) {
+      setError("Please enter a valid email address")
       return
     }
 
     setIsSubmitting(true)
-    setError('')
+    setError("")
 
     try {
-      // Check if email already exists
-      const emailExists = await waitlistService.checkEmailExists(email)
-      if (emailExists) {
-        setError('This email is already on our waitlist!')
+      const exists = await waitlistService.checkEmailExists(email)
+      if (exists) {
+        setError("This email is already on our waitlist!")
         setIsSubmitting(false)
         return
       }
 
-      // Add to waitlist with email only (no name required)
       await waitlistService.addSignup({
-        name: 'Waitlist User', // Default name since we're not collecting it
-        email: email
+        name: "Waitlist User",
+        email,
       })
-      
+
       setShowSuccessModal(true)
-      setEmail('')
-      
-    } catch (error) {
-      console.error('Error submitting waitlist form:', error)
-      
-      if (error.message.includes('duplicate key') || error.message.includes('unique constraint')) {
-        setError('This email is already on our waitlist!')
-      } else if (error.message.includes('Database error')) {
-        setError('Database temporarily unavailable. Please email contact@kellon.xyz')
+      setEmail("")
+    } catch (err) {
+      if (err.message.includes("duplicate")) {
+        setError("This email is already on our waitlist!")
       } else {
-        setError('Unable to join waitlist. Please try again or email contact@kellon.xyz')
+        setError("Something went wrong. Please try again.")
       }
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value)
-    setError('') // Clear error when user types
-  }
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleDirectSubmit()
-    }
-  }
-
-  const handleLogoClick = () => {
-    navigate('/')
-  }
-
-  const footerLinks = {
-    product: [
-      { name: "Features", href: "#features" },
-      { name: "Security", href: "#security" },
-      { name: "Pricing", href: "#pricing" },
-      { name: "API", href: "#api" }
-    ],
-    company: [
-      { name: "About", href: "#about" },
-      { name: "Careers", href: "#careers" },
-      { name: "Press", href: "#press" },
-      { name: "Blog", href: "#blog" }
-    ],
-    support: [
-      { name: "Help Center", href: "#help" },
-      { name: "Contact Us", href: "#contact" },
-      { name: "Status", href: "#status" },
-      { name: "Community", href: "#community" }
-    ],
-    legal: [
-      { name: "Privacy Policy", href: "#privacy" },
-      { name: "Terms of Service", href: "#terms" },
-      { name: "Compliance", href: "#compliance" },
-      { name: "Cookies", href: "#cookies" }
-    ]
-  }
-
   const socialLinks = [
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" }
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
   ]
 
   return (
-    <footer id="contact" className="bg-primary-900 border-t border-accent-500/20">
+    <footer className="bg-primary-800 border-t border-white/10 relative overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute left-1/2 top-0 w-[900px] h-[900px] -translate-x-1/2 bg-primary/20 blur-[180px] rounded-full opacity-40 pointer-events-none"></div>
+
       {/* Newsletter Section */}
-      <div className="border-b border-accent-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Join Our Waitlist
-              </h3>
-              <p className="text-gray-400">
-                Be the first to know when Kellon launches and get early access to borderless financial services.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={handleEmailChange}
-                onKeyPress={handleKeyPress}
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-colors"
-                disabled={isSubmitting}
-              />
-              <button 
-                className="btn-primary flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed" 
-                onClick={handleDirectSubmit}
-                disabled={isSubmitting || !email}
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Joining...
-                  </>
-                ) : (
-                  <>
-                    Join Waitlist
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </>
-                )}
-              </button>
-            </div>
-            {error && (
-              <div className="text-red-400 text-sm mt-2">
-                {error}
-              </div>
-            )}
+      <div className=" border-white/10 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto text-center">
+          <h3 className="text-3xl font-bold text-white mb-3 font-bungee">
+            Join Our Waitlist
+          </h3>
+          <p className="text-gray-400 max-w-xl mx-auto mb-6">
+            Get early access and updates before launch. No spam. No noise.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+                setError("")
+              }}
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white 
+              placeholder-gray-400 focus:border-primary-500 outline-none"
+            />
+
+            <button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="px-6 py-3 bg-primary-600 hover:bg-primary-500 rounded-xl 
+              text-white font-medium flex items-center justify-center gap-2 transition"
+            >
+              {isSubmitting ? (
+                <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
+              ) : (
+                <>
+                  Join
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
           </div>
+
+          {error && <p className="text-red-400 text-sm mt-3">{error}</p>}
         </div>
       </div>
 
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-center">
-          {/* Brand Column */}
-          <div className="text-center">
-            <div 
-              className="flex items-center justify-center space-x-3 mb-4 cursor-pointer hover:opacity-80 transition-opacity"
-              onClick={handleLogoClick}
-            >
-              <img 
-                src="/logo.png?v=20251108" 
-                alt="Kellon Logo" 
-                className="w-12 h-12 object-contain"
-              />
-              <span className="text-2xl font-bold text-white">Kellon</span>
-            </div>
-            <p className="text-gray-400 mb-6 max-w-sm mx-auto">
-              Your gateway to borderless payments and financial freedom. 
-              Breaking barriers to create a world without financial limits.
-            </p>
-            
-            {/* Contact Info */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-center text-gray-400">
-                <Mail className="w-4 h-4 mr-3" />
-                <span>contact@kellon.xyz</span>
-              </div>
-            </div>
+      <div className="max-w-6xl mx-auto py-14 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+        {/* Brand */}
+        <div className="text-center md:text-left">
+          <div
+            className="flex items-center justify-center md:justify-start gap-3 cursor-pointer mb-4"
+            onClick={() => navigate("/")}
+          >
+            <img src="/logo.png?v=20251108" className="w-12 h-12" />
+            <span className="text-2xl font-bold text-white">Kellon</span>
+          </div>
+
+          <div className="flex items-center mt-5 text-gray-400 gap-3 justify-center md:justify-start">
+            <Mail className="w-4 h-4" />
+            <span>contact@kellon.xyz</span>
+          </div>
+        </div>
+
+        {/* Footer Links */}
+        <div className="grid grid-cols-2 gap-10 text-center md:text-left">
+          <div>
+            <h4 className="text-white font-semibold mb-4 tracking-wide">
+              Company
+            </h4>
+            <ul className="space-y-2">
+              {["About", "Careers", "Press", "Blog"].map((item) => (
+                <li key={item}>
+                  <a className="text-gray-400 hover:text-white transition cursor-pointer">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-semibold mb-4 tracking-wide">
+              Support
+            </h4>
+            <ul className="space-y-2">
+              {["Help Center", "Contact", "Status", "Community"].map((item) => (
+                <li key={item}>
+                  <a className="text-gray-400 hover:text-white transition cursor-pointer">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Social */}
+        <div className="flex flex-col items-center md:items-end gap-4">
+          <h4 className="text-white font-semibold tracking-wide">Follow Us</h4>
+          <div className="flex gap-3">
+            {socialLinks.map((social) => {
+              const Icon = social.icon
+              return (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg 
+                  flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              )
+            })}
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 text-gray-400 text-sm mb-4 md:mb-0">
-              <span>© 2025 Kellon. All rights reserved.</span>
-              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-                <Link 
-                  to="/privacy-policy"
-                  className="hover:text-primary-400 transition-colors underline"
-                >
-                  Privacy Policy
-                </Link>
-                <Link 
-                  to="/terms-of-use"
-                  className="hover:text-primary-400 transition-colors underline"
-                >
-                  Terms of Use
-                </Link>
-                <Link 
-                  to="/disclaimer"
-                  className="hover:text-primary-400 transition-colors underline"
-                >
-                  Disclaimer
-                </Link>
-              </div>
-            </div>
-            
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              {socialLinks.map((social) => {
-                const IconComponent = social.icon
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    className="w-10 h-10 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
-                    aria-label={social.label}
-                  >
-                    <IconComponent className="w-5 h-5" />
-                  </a>
-                )
-              })}
-            </div>
+      <div className="border-t border-white/10 py-6 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm gap-3">
+          <span>© 2025 Kellon. All rights reserved.</span>
+
+          <div className="flex gap-6 underline">
+            <Link to="/privacy-policy">Privacy</Link>
+            <Link to="/terms-of-use">Terms</Link>
+            <Link to="/disclaimer">Disclaimer</Link>
           </div>
         </div>
       </div>
 
-      {/* Success Modal */}
-      <SuccessModal 
-        isOpen={showSuccessModal} 
+      <SuccessModal
+        isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
         message="Thanks for joining our waitlist!"
       />
