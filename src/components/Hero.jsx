@@ -136,10 +136,10 @@ export default function Hero() {
                 Join Waitlist
                 {/* <ArrowRight className="w-5 h-5" /> */}
               </button>
-              <button className="px-6 py-3 flex items-center justify-center gap-2 border border-white rounded-md text-white hover:ring-2 hover:ring-accent-400 hover:ring-offset-2 hover:ring-offset-gray-900 transition-all duration-300">
+              {/* <button className="px-6 py-3 flex items-center justify-center gap-2 border border-white rounded-md text-white hover:ring-2 hover:ring-accent-400 hover:ring-offset-2 hover:ring-offset-gray-900 transition-all duration-300">
                 <Play className="w-5 h-5" />
                 Watch Demo
-              </button>
+              </button> */}
             </div>
           </div>
 
