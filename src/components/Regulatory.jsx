@@ -20,7 +20,7 @@ const regulatoryPoints = [
     icon: <Lock className="w-6 h-6 text-primary" />,
     title: "Secure Wallet",
     description:
-      "Recovery and key management are handled securely through Web3Auth, ensuring safety and reliability",
+      "Recovery and key management are handled securely, ensuring safety and reliability",
   },
   {
     icon: <Globe className="w-6 h-6 text-primary" />,
