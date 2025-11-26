@@ -10,6 +10,7 @@ import {
   Award,
   Target,
   Rocket,
+  Key,
 } from "lucide-react"
 
 // Framer Motion
@@ -47,19 +48,25 @@ const MarketOpportunity = () => {
       icon: Shield,
       title: "Multi-Layer Security",
       description:
-        "Bank-grade encryption, multi-signature wallets, and cold storage protection",
+        "Bank-grade encryption, user-controlled wallets, and secure key management built into every transaction",
     },
     {
       icon: Zap,
       title: "Lightning Speed",
       description:
-        "Sub-second transactions with our optimized financial infrastructure",
+        "Sub-second settlements powered by an optimized crypto-to-fiat infrastructure",
     },
     {
-      icon: Award,
-      title: "Regulatory Compliant",
+      icon: Key,
+      title: "Non-Custodial by Design",
       description:
-        "Licensed in 150+ jurisdictions with full KYC/AML compliance",
+        "You stay in control. Kellon never holds your crypto or private keys — your assets remain fully yours",
+    },
+    {
+      icon: Globe,
+      title: "Future-Ready Compliance",
+      description:
+        "Our infrastructure is designed to integrate seamlessly with compliance partners as regulatory requirements evolve, without compromising user sovereignty",
     },
   ]
 
