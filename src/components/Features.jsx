@@ -96,6 +96,20 @@ const Features = () => {
     config: config.molasses,
   })
 
+  // Scroll to waitlist function
+  const scrollToWaitlist = () => {
+    const footer = document.querySelector("footer")
+    if (footer) {
+      footer.scrollIntoView({ behavior: "smooth" })
+      setTimeout(() => {
+        const emailInput = footer.querySelector('input[type="email"]')
+        if (emailInput) {
+          emailInput.focus()
+        }
+      }, 500)
+    }
+  }
+
   return (
     <section
       id="features"
@@ -265,8 +279,12 @@ const Features = () => {
             <p className="text-gray-400 mb-6">
               Ready to experience the future of finance?
             </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-accent-400 to-primary-800 rounded-xl text-white font-semibold hover:scale-105 hover:shadow-xl hover:shadow-primary-500/25 transition-all duration-300">
+            <button
+              onClick={scrollToWaitlist}
+              className="px-8 py-4 bg-gradient-to-r from-accent-400 to-primary-800 rounded-xl text-white font-semibold hover:scale-105 hover:shadow-xl hover:shadow-primary-500/25 transition-all duration-300 flex items-center justify-center gap-2 mx-auto"
+            >
               Join Waitlist - Get Early Access
+              <ArrowRight className="w-5 h-5" />
             </button>
           </animated.div>
         </div>
