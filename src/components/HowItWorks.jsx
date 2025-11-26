@@ -164,28 +164,27 @@ const steps = [
   {
     icon: CheckCircle,
     title: "Create Your Account",
-    description: "Sign up easily with email, Google, or Apple.",
+    description: "Sign up easily with email, Google, or Apple",
   },
   {
     icon: Wallet,
     title: "Wallet Generation",
-    description:
-      "A secure non-custodial wallet is automatically created via Web3Auth.",
+    description: "A secure non-custodial wallet is created automatically",
   },
   {
     icon: Repeat,
     title: "Seamless On-Ramp & Off-Ramp",
-    description: "Regulated partners handle safe fiat ↔ crypto conversions.",
+    description: "Regulated partners handle safe fiat ↔ crypto conversions",
   },
   {
     icon: Building,
     title: "Invest in Tokenized RWA",
     description:
-      "Buy fractional ownership in real-world assets directly from your wallet.",
+      "Buy fractional ownership in real-world assets directly from your wallet",
   },
   {
     icon: LayoutGrid,
     title: "Manage Everything in One App",
-    description: "Payments, transfers, and investments — all in one place.",
+    description: "Payments, transfers, and investments — all in one place",
   },
 ]
