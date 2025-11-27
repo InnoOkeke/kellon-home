@@ -30,7 +30,7 @@ export default function FAQ() {
 const faqs = [
   {
     q: "Do you hold custody of my crypto?",
-    a: "No. Your wallet is non-custodial via Web3Auth.",
+    a: "No. Your wallet is fully non-custodial, meaning you control your own assets at all times.",
   },
   {
     q: "How do I convert fiat to crypto or withdraw to fiat?",
