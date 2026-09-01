@@ -1,9 +1,27 @@
+import { copyFileSync, mkdirSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+const appRoutes = ['privacy-policy', 'terms-of-use', 'disclaimer']
+
+const staticRouteCopies = () => ({
+  name: 'static-route-copies',
+  closeBundle() {
+    const distDir = resolve(process.cwd(), 'dist')
+    const indexFile = resolve(distDir, 'index.html')
+
+    appRoutes.forEach((route) => {
+      const routeDir = resolve(distDir, route)
+      mkdirSync(routeDir, { recursive: true })
+      copyFileSync(indexFile, resolve(routeDir, 'index.html'))
+    })
+  }
+})
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), staticRouteCopies()],
   base: '/',
   server: {
     port: 3000,
