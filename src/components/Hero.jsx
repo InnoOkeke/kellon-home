@@ -6,7 +6,7 @@ import { ArrowRight, Star, Globe, Shield, Zap, Mouse } from "lucide-react"
 const headlines = [
   "Borderless Payments",
   "Crypto–Native Global Investments",
-  "One Wallet",
+  "Non-Custodial Wallet",
 ]
 
 const images = [
