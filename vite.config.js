@@ -1,5 +1,6 @@
 import { copyFileSync, mkdirSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { cwd } from 'node:process'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -8,7 +9,7 @@ const appRoutes = ['privacy-policy', 'terms-of-use', 'disclaimer']
 const staticRouteCopies = () => ({
   name: 'static-route-copies',
   closeBundle() {
-    const distDir = resolve(process.cwd(), 'dist')
+    const distDir = resolve(cwd(), 'dist')
     const indexFile = resolve(distDir, 'index.html')
 
     appRoutes.forEach((route) => {
