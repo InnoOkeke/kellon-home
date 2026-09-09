@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react"
 import { Menu, X, ArrowUpRight } from "lucide-react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
+import PlayStoreButton from "./PlayStoreButton"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -17,17 +18,6 @@ export default function Header() {
       document.body.style.overflow = ""
     }
   }, [isMenuOpen])
-
-  const scrollToWaitlist = () => {
-    setIsMenuOpen(false)
-    const footer = document.querySelector("footer")
-    if (footer) {
-      footer.scrollIntoView({ behavior: "smooth" })
-      setTimeout(() => {
-        footer.querySelector('input[type="email"]')?.focus()
-      }, 500)
-    }
-  }
 
   const handleMobileLink = (e, targetId) => {
     e.preventDefault()
@@ -93,12 +83,11 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={scrollToWaitlist}
-              className="hidden md:block bg-white text-black px-5 py-2 rounded-md font-bold text-sm hover:bg-accent-500 transition-all"
-            >
-              Join Waitlist
-            </button>
+            <PlayStoreButton
+              compact
+              label="Google Play"
+              className="hidden rounded-md px-4 py-2 md:inline-flex"
+            />
             <button onClick={toggleMenu} className="md:hidden text-white p-2">
               {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -155,12 +144,12 @@ export default function Header() {
               transition={{ delay: 0.5 }}
               className="mt-20  border-white/10 pt-10"
             >
-              <button
-                onClick={scrollToWaitlist}
-                className="w-full py-4 bg-white text-black  hover:bg-accent-500 rounded-md font-bold text-lg transition-all"
-              >
-                Get Early Access
-              </button>
+              <PlayStoreButton
+                onClick={() => setIsMenuOpen(false)}
+                label="Get Kellon"
+                sublabel="Now on Google Play"
+                className="w-full rounded-md py-4"
+              />
             </motion.div>
           </motion.div>
         )}

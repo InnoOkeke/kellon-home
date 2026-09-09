@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Star, Globe, Shield, Zap, Mouse } from "lucide-react"
+import { Star, Globe, Shield, Zap, Mouse } from "lucide-react"
+import PlayStoreButton from "./PlayStoreButton"
 
 // --- DATA ---
 const headlines = [
@@ -85,18 +86,6 @@ export default function Hero() {
     }
   }, [isDesktop])
 
-  const scrollToWaitlist = () => {
-    const footer = document.querySelector("footer")
-    if (footer) {
-      footer.scrollIntoView({ behavior: "smooth" })
-      setTimeout(() => {
-        const emailInput = footer.querySelector('input[type="email"]')
-        // @ts-ignore
-        if (emailInput) emailInput.focus()
-      }, 500)
-    }
-  }
-
   return (
     <section
       ref={containerRef}
@@ -144,17 +133,11 @@ export default function Hero() {
             <p className="text-base xs:text-xl  text-gray-300 leading-relaxed mb-10 max-w-lg">
               Kellon Mobile empowers you with a non-custodial wallet for
               borderless payments, tokenized asset management, and global
-              investments - all in one secure, intuitive app.
+              investments - now available in early access on Google Play.
             </p>
 
             <div className="relative z-20">
-              <button
-                onClick={scrollToWaitlist}
-                className="group relative px-8 py-4 bg-accent-500 hover:bg-accent-400 text-primary-950 rounded-full font-bold text-lg transition-all shadow-[0_0_40px_rgba(234,179,8,0.3)] hover:shadow-[0_0_60px_rgba(234,179,8,0.5)] flex items-center gap-2 w-fit"
-              >
-                Join Waitlist
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <PlayStoreButton className="rounded-full px-6 py-4 sm:px-7" />
 
               <div className="mt-16 pt-8 border-t border-white/10 hidden sm:block">
                 <p className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">

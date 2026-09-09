@@ -1,7 +1,7 @@
 {
   "name": "Kellon Mobile - Borderless Payments",
   "short_name": "Kellon",
-  "description": "Borderless payments and global investments through one powerful financial platform",
+  "description": "Borderless payments, tokenized assets, and global investments in one non-custodial wallet. Now in early access on Google Play.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1e1b4b",
@@ -28,10 +28,10 @@
   ],
   "shortcuts": [
     {
-      "name": "Join Waitlist",
-      "short_name": "Waitlist",
-      "description": "Join the Kellon waitlist",
-      "url": "/#contact",
+      "name": "Get Kellon on Google Play",
+      "short_name": "Google Play",
+      "description": "Install the Kellon early-access app",
+      "url": "https://play.google.com/store/apps/details?id=com.kellonapp",
       "icons": [
         {
           "src": "/AppIcons/Assets.xcassets/AppIcon.appiconset/_/96.png",

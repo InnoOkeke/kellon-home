@@ -11,12 +11,12 @@ import {
 import {
   Users,
   Rocket,
-  ArrowRight,
   ShieldCheck,
   Zap,
   Target,
   Eye,
 } from "lucide-react"
+import PlayStoreButton from "./PlayStoreButton"
 // --- STATIC DATA ---
 const VALUES = [
   {
@@ -133,18 +133,6 @@ const About = () => {
   const bgTextX = useTransform(smoothProgress, [0, 1], ["0%", "-30%"])
   const leftColY = useTransform(smoothProgress, [0.1, 1], [100, 0])
   const rightColY = useTransform(smoothProgress, [0.1, 1], [200, -50])
-
-  const scrollToWaitlist = useCallback(() => {
-    const footer = document.querySelector("footer")
-    if (footer) {
-      footer.scrollIntoView({ behavior: "smooth" })
-      setTimeout(() => {
-        const input = footer.querySelector('input[type="email"]')
-        // @ts-ignore
-        input?.focus()
-      }, 500)
-    }
-  }, [])
 
   return (
     <section
@@ -274,25 +262,18 @@ const About = () => {
               </div>
 
               <h3 className="text-3xl font-bold text-white mb-4">
-                Join the Revolution
+                Try Kellon Early Access
               </h3>
               <p className="text-gray-400 mb-8 leading-relaxed">
-                Be one of the first 5,000 users to shape the future of global
-                wealth management.
+                Kellon is now listed on Google Play. Install the early-access
+                app and help shape the next checkpoint for borderless finance.
               </p>
 
-              <button
-                onClick={scrollToWaitlist}
-                // A11y: Ensure focus visibility for keyboard users
-                className="group relative w-full py-5 bg-white text-black rounded-2xl font-bold text-base hover:scale-[1.02] active:scale-[0.98] transition-all overflow-hidden shadow-xl focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-500"
-                aria-label="Scroll to waitlist form"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-white to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative flex items-center justify-center gap-3">
-                  Join Waitlist{" "}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
+              <PlayStoreButton
+                label="Open Google Play"
+                sublabel="Install early access"
+                className="w-full py-5"
+              />
             </FluidCard>
           </motion.div>
         </div>
