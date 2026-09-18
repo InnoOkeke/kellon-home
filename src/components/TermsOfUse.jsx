@@ -33,11 +33,7 @@ const TermsOfUse = () => {
         const location = await getVisitorLocation()
         const legalJurisdiction = getLegalJurisdiction(location.countryCode)
         setJurisdiction(legalJurisdiction)
-      } catch (error) {
-        console.warn(
-          "Location detection failed, using default jurisdiction:",
-          error
-        )
+      } catch {
         setJurisdiction("Malta")
       } finally {
         setIsLoading(false)

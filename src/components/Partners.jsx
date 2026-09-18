@@ -88,7 +88,6 @@ const Partners = () => {
                         className="max-h-6 sm:max-h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
                         style={{ minWidth: '32px', minHeight: '12px' }}
                         onError={(e) => {
-                          console.log(`Failed to load logo for ${partner.name}:`, e.target.src);
                           e.target.style.display = 'none';
                           e.target.parentElement.nextSibling.style.display = 'flex';
                         }}
@@ -119,7 +118,6 @@ const Partners = () => {
                         className="max-h-6 sm:max-h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110"
                         style={{ minWidth: '32px', minHeight: '12px' }}
                         onError={(e) => {
-                          console.log(`Failed to load logo for ${partner.name}:`, e.target.src);
                           e.target.style.display = 'none';
                           e.target.parentElement.nextSibling.style.display = 'flex';
                         }}

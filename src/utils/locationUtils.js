@@ -13,8 +13,8 @@ export const getVisitorLocation = async () => {
         city: data.city
       }
     }
-  } catch (error) {
-    console.warn('Failed to fetch location from ipapi.co:', error)
+  } catch {
+    // Try the fallback provider below.
   }
 
   // Fallback: Try another service
@@ -30,8 +30,8 @@ export const getVisitorLocation = async () => {
         city: null
       }
     }
-  } catch (error) {
-    console.warn('Failed to fetch location from country.is:', error)
+  } catch {
+    // Return the default location below.
   }
 
   // Final fallback: Default location

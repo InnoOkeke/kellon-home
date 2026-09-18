@@ -1,7 +1,11 @@
 import React from "react"
+import { Download } from "lucide-react"
 
 export const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.kellonapp"
+
+export const APK_DOWNLOAD_URL =
+  "https://release-assets.githubusercontent.com/github-production-release-asset/1123643196/f9aa0203-afca-436c-8c75-aa0f0dac73e1?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-18T15%3A17%3A52Z&rscd=attachment%3B+filename%3Dapp-release.apk&rsct=application%2Fvnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-18T14%3A17%3A18Z&ske=2026-09-18T15%3A17%3A52Z&sks=b&skv=2018-11-09&sig=JarvgByi0bjCAec6vGNTzlGDb5DYsGEjfRJdt1YIHQ8%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4OTc0MjgzOSwibmJmIjoxNzg5NzQxMDM5LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.-Ox7ReRMdGRStnolzyI5-ebQmPLS58KTytwxT1yKI-o&response-content-disposition=attachment%3B%20filename%3Dapp-release.apk&response-content-type=application%2Fvnd.android.package-archive"
 
 export const GooglePlayLogo = ({ className = "h-6 w-6" }) => (
   <svg
@@ -55,6 +59,19 @@ const PlayStoreButton = ({
         {label}
       </span>
     </span>
+  </a>
+)
+
+export const DirectApkLink = ({ className = "", onClick }) => (
+  <a
+    href={APK_DOWNLOAD_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={onClick}
+    className={`inline-flex min-h-[64px] items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:border-accent-400/70 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 ${className}`}
+  >
+    <Download size={16} aria-hidden="true" />
+    <span>Download APK</span>
   </a>
 )
 
