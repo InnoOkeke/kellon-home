@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Star, Globe, Shield, Zap, Mouse } from "lucide-react"
-import PlayStoreButton from "./PlayStoreButton"
+import PlayStoreButton, { DirectApkLink } from "./PlayStoreButton"
 
 // --- DATA ---
 const headlines = [
@@ -137,7 +137,10 @@ export default function Hero() {
             </p>
 
             <div className="relative z-20">
-              <PlayStoreButton className="rounded-full px-6 py-4 sm:px-7" />
+              <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-stretch sm:justify-start">
+                <PlayStoreButton className="w-full rounded-full px-6 py-4 sm:w-auto sm:px-7" />
+                <DirectApkLink className="w-full rounded-full sm:w-auto" />
+              </div>
 
               <div className="mt-16 pt-8 border-t border-white/10 hidden sm:block">
                 <p className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">

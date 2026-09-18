@@ -16,7 +16,7 @@ import {
   Target,
   Eye,
 } from "lucide-react"
-import PlayStoreButton from "./PlayStoreButton"
+import PlayStoreButton, { DirectApkLink } from "./PlayStoreButton"
 // --- STATIC DATA ---
 const VALUES = [
   {
@@ -274,6 +274,7 @@ const About = () => {
                 sublabel="Install early access"
                 className="w-full py-5"
               />
+              <DirectApkLink className="mt-5 min-h-[76px] w-full" />
             </FluidCard>
           </motion.div>
         </div>

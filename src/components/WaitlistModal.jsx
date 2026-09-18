@@ -63,9 +63,6 @@ const WaitlistModal = ({ isOpen, onClose }) => {
       }, 3000)
       
     } catch (error) {
-      console.error('Error submitting waitlist form:', error)
-      console.error('Error details:', error.message)
-      
       // Handle specific error types
       if (error.message.includes('duplicate key') || error.message.includes('unique constraint')) {
         setError('This email is already on our waitlist! Check your inbox for previous confirmation.')

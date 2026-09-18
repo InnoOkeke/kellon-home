@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Mail, Github, Linkedin, MapPin } from "lucide-react"
 import { XIcon } from "../lib/icons/LucideIcons"
-import PlayStoreButton from "./PlayStoreButton"
+import PlayStoreButton, { DirectApkLink } from "./PlayStoreButton"
 
 const Footer = () => {
   const navigate = useNavigate()
@@ -66,11 +66,14 @@ const Footer = () => {
               wallet.
             </p>
 
-            <PlayStoreButton
-              label="Get Kellon on Google Play"
-              sublabel="Early access is live"
-              className="mx-auto"
-            />
+            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-stretch sm:justify-center">
+              <PlayStoreButton
+                label="Get Kellon on Google Play"
+                sublabel="Early access is live"
+                className="w-full sm:w-auto"
+              />
+              <DirectApkLink className="w-full sm:w-auto" />
+            </div>
           </div>
         </div>
 
