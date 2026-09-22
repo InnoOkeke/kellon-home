@@ -5,7 +5,7 @@ export const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.kellonapp"
 
 export const APK_DOWNLOAD_URL =
-  "https://release-assets.githubusercontent.com/github-production-release-asset/1123643196/d5921352-b72c-4205-98d5-57a0435d96c1?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-09-22T11%3A10%3A43Z&rscd=attachment%3B+filename%3Dapp-release.apk&rsct=application%2Fvnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-09-22T10%3A09%3A52Z&ske=2026-09-22T11%3A10%3A43Z&sks=b&skv=2018-11-09&sig=CuplVQj1Lz7lwsgpgA7gfv9ygRk3D13pg2HRBJksmZ0%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc5MDA3MzU5MywibmJmIjoxNzkwMDcxNzkzLCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.VkqNV1Zj0ogR7P-h3_g2gPc9MKMfE4chZjV8mJXOCFk&response-content-disposition=attachment%3B%20filename%3Dapp-release.apk&response-content-type=application%2Fvnd.android.package-archive"
+  "https://github.com/KELLON-RWA/kellon-app/releases/download/v1.3.8/app-release.apk"
 
 export const GooglePlayLogo = ({ className = "h-6 w-6" }) => (
   <svg
