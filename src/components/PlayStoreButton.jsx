@@ -5,7 +5,7 @@ export const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.kellonapp"
 
 export const APK_DOWNLOAD_URL =
-  "https://github.com/KELLON-RWA/kellon-app/releases/download/v1.3.8/app-release.apk"
+  "https://github.com/KELLON-RWA/kellon-app/releases/download/1.3.9/app-release.apk"
 
 export const GooglePlayLogo = ({ className = "h-6 w-6" }) => (
   <svg
