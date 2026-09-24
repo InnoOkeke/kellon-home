@@ -1,8 +1,10 @@
 import React from "react"
-import { Download } from "lucide-react"
+import { Download, ExternalLink } from "lucide-react"
 
 export const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.kellonapp"
+
+export const WEB_APP_URL = "https://app.kellon.xyz/"
 
 export const APK_DOWNLOAD_URL =
   "https://github.com/KELLON-RWA/kellon-app/releases/download/1.3.9/app-release.apk"
@@ -59,6 +61,25 @@ const PlayStoreButton = ({
         {label}
       </span>
     </span>
+  </a>
+)
+
+export const WebAppButton = ({
+  className = "",
+  compact = false,
+  label = "Open Web App",
+  onClick,
+}) => (
+  <a
+    href={WEB_APP_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={onClick}
+    className={`inline-flex items-center justify-center gap-2 rounded-2xl bg-accent-500 px-5 py-3 text-sm font-extrabold text-white shadow-[0_0_40px_rgba(217,70,239,0.24)] transition-all hover:-translate-y-0.5 hover:bg-accent-400 hover:shadow-[0_0_55px_rgba(217,70,239,0.38)] focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-300 ${className}`}
+    aria-label="Open Kellon web app"
+  >
+    <span>{label}</span>
+    <ExternalLink size={compact ? 16 : 18} aria-hidden="true" />
   </a>
 )
 
