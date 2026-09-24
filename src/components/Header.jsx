@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react"
 import { Menu, X, ArrowUpRight } from "lucide-react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import PlayStoreButton from "./PlayStoreButton"
+import { WebAppButton } from "./PlayStoreButton"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -83,9 +83,9 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-4">
-            <PlayStoreButton
+            <WebAppButton
               compact
-              label="Google Play"
+              label="Open App"
               className="hidden rounded-md px-4 py-2 md:inline-flex"
             />
             <button onClick={toggleMenu} className="md:hidden text-white p-2">
@@ -144,10 +144,9 @@ export default function Header() {
               transition={{ delay: 0.5 }}
               className="mt-20  border-white/10 pt-10"
             >
-              <PlayStoreButton
+              <WebAppButton
                 onClick={() => setIsMenuOpen(false)}
-                label="Get Kellon"
-                sublabel="Now on Google Play"
+                label="Open Kellon App"
                 className="w-full rounded-md py-4"
               />
             </motion.div>

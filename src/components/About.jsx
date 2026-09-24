@@ -16,7 +16,7 @@ import {
   Target,
   Eye,
 } from "lucide-react"
-import PlayStoreButton, { DirectApkLink } from "./PlayStoreButton"
+import PlayStoreButton, { DirectApkLink, WebAppButton } from "./PlayStoreButton"
 // --- STATIC DATA ---
 const VALUES = [
   {
@@ -269,10 +269,11 @@ const About = () => {
                 app and help shape the next checkpoint for borderless finance.
               </p>
 
+              <WebAppButton className="w-full py-5" />
               <PlayStoreButton
                 label="Open Google Play"
                 sublabel="Install early access"
-                className="w-full py-5"
+                className="mt-5 w-full py-5"
               />
               <DirectApkLink className="mt-5 min-h-[76px] w-full" />
             </FluidCard>
