@@ -65,7 +65,7 @@ export default function SupportedAssets() {
 
             <p className="text-sm text-gray-400 font-medium text-center sm:text-left leading-snug">
               Instant settlement on{"  "}
-              <span className="text-white font-semibold">5+ networks</span>
+              <span className="text-white font-semibold">7+ networks</span>
             </p>
           </motion.div>
         </div>
