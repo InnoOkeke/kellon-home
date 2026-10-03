@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Star, Globe, Shield, Zap, Mouse } from "lucide-react"
+import { Star, Zap, Mouse } from "lucide-react"
 import PlayStoreButton, { DirectApkLink } from "./PlayStoreButton"
 
 // --- DATA ---
@@ -143,20 +143,27 @@ export default function Hero() {
               </div>
 
               <div className="mt-16 pt-8 border-t border-white/10 hidden sm:block">
-                <p className="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wider">
-                  Trusted Infrastructure
+                <p className="text-sm font-semibold text-white uppercase tracking-wider">
+                  One Wallet, More Possibilities
                 </p>
-                <div className="flex flex-wrap gap-4 lg:gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                  <div className="flex items-center gap-2 text-white font-bold">
-                    <Globe size={24} /> GlobalNet
-                  </div>
-                  <div className="flex items-center gap-2 text-white font-bold">
-                    <Shield size={24} /> SecureChain
-                  </div>
-                  <div className="flex items-center gap-2 text-white font-bold">
-                    <Zap size={24} /> FlashPay
-                  </div>
-                </div>
+                <p className="mt-3 flex items-center gap-2 text-sm leading-relaxed text-gray-400">
+                  <span className="flex -space-x-1" aria-label="USDC and USDT">
+                    <img
+                      src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
+                      alt="USDC"
+                      className="h-5 w-5 rounded-full border border-primary-900 object-contain"
+                      loading="lazy"
+                    />
+                    <img
+                      src="https://cryptologos.cc/logos/tether-usdt-logo.png"
+                      alt="USDT"
+                      className="h-5 w-5 rounded-full border border-primary-900 object-contain"
+                      loading="lazy"
+                    />
+                  </span>
+                  <span aria-hidden="true">·</span>
+                  <span>Mobile + Web · Payments, Earn & Tokenized Assets</span>
+                </p>
               </div>
             </div>
           </div>
