@@ -124,7 +124,7 @@ const HowItWorks = () => {
             />
             <FeaturePoint
               title="All-in-One Control"
-              desc="Manage fiat, crypto, and asset portfolio in a single view."
+              desc="Manage your crypto and asset portfolio in a single view."
             />
           </div>
         </motion.div>
