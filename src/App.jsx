@@ -64,12 +64,16 @@ const HomePage = () => {
     <div className="min-h-screen  font-manrope ">
       <Header />
       <main>
-        <Hero />
+        <div className="homepage-intro">
+          <Hero />
+          <Suspense fallback={<LoadingScreen inline />}>
+            <Traction />
+          </Suspense>
+        </div>
         <Suspense fallback={<LoadingScreen inline />}>
           <Features />
           <HowItWorks />
           <MarketOpportunity />
-          <Traction />
           <ParallaxSection />
           <About />
           <FAQ />

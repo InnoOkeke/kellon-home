@@ -10,7 +10,7 @@ export default function SupportedAssets() {
 
   return (
     <section
-      className="relative w-full py-20 pb-2 bg-primary-900 overflow-hidden"
+      className="supported-networks relative w-full py-6 sm:py-8 bg-transparent overflow-hidden"
       aria-label="Supported Network Infrastructure"
     >
       <div className="relative z-10 w-full">
