@@ -17,28 +17,31 @@ const chains = [
   },
 ]
 
+const SCROLL_DURATION = 210
+
 const ChainSlider = () => {
   const SCROLL_ITEMS = [...chains, ...chains, ...chains, ...chains]
 
   return (
     <section
-      className="relative w-full overflow-hidden py-4 md:py-6 bg-transparent"
+      className="relative mx-auto w-full max-w-7xl overflow-hidden py-4 md:py-6 bg-transparent"
       aria-label="Supported Blockchains"
     >
       <div
-        className="flex w-full select-none"
+        className="flex w-full select-none overflow-hidden"
         style={{
           maskImage:
-            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+            "linear-gradient(to right, transparent, rgb(0 0 0 / 35%) 3%, black 10%, black 90%, rgb(0 0 0 / 35%) 97%, transparent)",
           WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+            "linear-gradient(to right, transparent, rgb(0 0 0 / 35%) 3%, black 10%, black 90%, rgb(0 0 0 / 35%) 97%, transparent)",
         }}
       >
         <motion.ul
+          key={SCROLL_DURATION}
           className="flex min-w-full shrink-0 items-center gap-4 md:gap-8 lg:gap-12 px-4"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
-            duration: 50,
+            duration: SCROLL_DURATION,
             ease: "linear",
             repeat: Infinity,
           }}
@@ -58,7 +61,7 @@ const ChainSlider = () => {
                   <img
                     src={chain.logoSrc}
                     alt={isDuplicate ? "" : `${chain.name} logo`}
-                    className="h-9 w-32 object-contain lg:h-10 lg:w-36"
+                    className="h-7 w-24 object-contain lg:h-8 lg:w-28"
                     loading="lazy"
                   />
                 ) : (
@@ -76,13 +79,13 @@ const ChainSlider = () => {
 const NetworkIcon = ({ icon }) => {
   const IconComponent = Icons[icon]
 
-  return <IconComponent className="w-32 lg:w-36" />
+  return <IconComponent className="h-7 w-24 lg:h-8 lg:w-28" />
 }
 
 const SolanaLogo = () => (
   <svg
     viewBox="0 0 108 56"
-    className="h-9 w-32 lg:h-10 lg:w-36"
+    className="h-7 w-24 lg:h-8 lg:w-28"
     role="img"
     aria-label="Solana logo"
   >
