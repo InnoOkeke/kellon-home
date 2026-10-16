@@ -41,26 +41,42 @@ const PlayStoreButton = ({
   label = "Get it on Google Play",
   sublabel = "Early access",
   onClick,
+  variant = "default",
 }) => (
   <a
     href={PLAY_STORE_URL}
     target="_blank"
     rel="noopener noreferrer"
     onClick={onClick}
-    className={`group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-5 py-3 text-primary-950 shadow-[0_0_40px_rgba(255,255,255,0.16)] transition-all hover:-translate-y-0.5 hover:bg-accent-50 hover:shadow-[0_0_55px_rgba(217,70,239,0.28)] focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-500 ${className}`}
+    className={`${variant === "official"
+      ? "relative inline-flex h-[60px] w-[200px] shrink-0 items-center justify-center rounded-lg focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-300 focus-visible:ring-offset-4 focus-visible:ring-offset-primary-900"
+      : "group inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-5 py-3 text-primary-950 shadow-[0_0_40px_rgba(255,255,255,0.16)] transition-all hover:-translate-y-0.5 hover:bg-accent-50 hover:shadow-[0_0_55px_rgba(217,70,239,0.28)] focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-500"
+    } ${className}`}
     aria-label="Get Kellon on Google Play"
   >
-    <GooglePlayLogo className={compact ? "h-5 w-5" : "h-7 w-7"} />
-    <span className="flex flex-col items-start leading-none">
-      {!compact && (
-        <span className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary-950/60">
-          {sublabel}
+    {variant === "official" ? (
+      <img
+        src="/images/google-play-badge.png"
+        alt="Get it on Google Play"
+        width="646"
+        height="250"
+        className="pointer-events-none absolute left-1/2 top-1/2 w-[115%] max-w-none -translate-x-1/2 -translate-y-1/2"
+      />
+    ) : (
+      <>
+        <GooglePlayLogo className={compact ? "h-5 w-5" : "h-7 w-7"} />
+        <span className="flex flex-col items-start leading-none">
+          {!compact && (
+            <span className="mb-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-primary-950/60">
+              {sublabel}
+            </span>
+          )}
+          <span className="text-sm font-extrabold text-primary-950 sm:text-base">
+            {label}
+          </span>
         </span>
-      )}
-      <span className="text-sm font-extrabold text-primary-950 sm:text-base">
-        {label}
-      </span>
-    </span>
+      </>
+    )}
   </a>
 )
 
@@ -83,16 +99,24 @@ export const WebAppButton = ({
   </a>
 )
 
-export const DirectApkLink = ({ className = "", onClick }) => (
+export const DirectApkLink = ({
+  className = "",
+  onClick,
+  variant = "default",
+  label = "Download APK",
+}) => (
   <a
     href={APK_DOWNLOAD_URL}
     target="_blank"
     rel="noopener noreferrer"
     onClick={onClick}
-    className={`inline-flex min-h-[64px] items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:border-accent-400/70 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500 ${className}`}
+    className={`${variant === "text"
+      ? "inline-flex min-h-[44px] items-center rounded-sm text-sm text-accent-200 underline decoration-accent-300/50 underline-offset-4 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-300 focus-visible:ring-offset-4 focus-visible:ring-offset-primary-900"
+      : "inline-flex min-h-[64px] items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:border-accent-400/70 hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
+    } ${className}`}
   >
-    <Download size={16} aria-hidden="true" />
-    <span>Download APK</span>
+    {variant !== "text" && <Download size={16} aria-hidden="true" />}
+    <span>{label}</span>
   </a>
 )
 
