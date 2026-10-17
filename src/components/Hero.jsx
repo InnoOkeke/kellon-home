@@ -1,290 +1,55 @@
-import React, { useRef, useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Star, Zap, Mouse } from "lucide-react"
-import PlayStoreButton, { DirectApkLink } from "./PlayStoreButton"
-
-// --- DATA ---
-const headlines = [
-  "Borderless Payments",
-  "Crypto–Native Global Investments",
-  "Non-Custodial Wallet",
-]
-
-const images = [
-  "https://res.cloudinary.com/dcxghlgre/image/upload/v1767998142/kellon/Mockuuups_Free_Google_Pixel_10_Pro_Mockup_mlymet.png",
-  "https://res.cloudinary.com/dcxghlgre/image/upload/v1767971954/kellon/Mockuuups_Free_Google_Pixel_10_Pro_Mockup_uwpoux.png",
-  "https://res.cloudinary.com/dcxghlgre/image/upload/v1767971954/kellon/Mockuuups_Free_Google_Pixel_10_Pro_Mockup_anpi27.png",
-  "https://res.cloudinary.com/dcxghlgre/image/upload/v1767971955/kellon/Mockuuups_Free_Google_Pixel_10_Pro_Mockup_mwypva.png",
-].map((url) =>
-  url.replace("/image/upload/", "/image/upload/f_auto,q_auto,w_720/")
-)
+import React from "react"
+import { motion, useReducedMotion } from "framer-motion"
+import { Star } from "lucide-react"
+import PlayStoreButton, { DirectApkLink, WebAppButton } from "./PlayStoreButton"
+import HeroActivity from "./HeroActivity"
+import "./Hero.css"
 
 export default function Hero() {
-  const containerRef = useRef(null)
-  const currentImageRef = useRef(0)
-  const frameRef = useRef(null)
-  const [currentImage, setCurrentImage] = useState(0)
-  const [currentHeadline, setCurrentHeadline] = useState(0)
-  const [isDesktop, setIsDesktop] = useState(() =>
-    typeof window === "undefined" ? false : window.innerWidth >= 1024
-  )
+  const reduceMotion = useReducedMotion()
 
-  // 1. Headline Loop
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeadline((prev) => (prev + 1) % headlines.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
-  // 2. Scroll-driven Image Switch
-  useEffect(() => {
-    const onResize = () => setIsDesktop(window.innerWidth >= 1024)
-    window.addEventListener("resize", onResize, { passive: true })
-    return () => window.removeEventListener("resize", onResize)
-  }, [])
-
-  // 2. Scroll-driven Image Switch
-  useEffect(() => {
-    if (!isDesktop) return undefined
-
-    const onScroll = () => {
-      if (frameRef.current) return
-
-      // @ts-ignore
-      frameRef.current = window.requestAnimationFrame(() => {
-        frameRef.current = null
-
-      if (!containerRef.current) return
-
-      // @ts-ignore
-      const rect = containerRef.current.getBoundingClientRect()
-      const scrollTop = Math.min(
-        Math.max(0, -rect.top),
-        rect.height - window.innerHeight
-      )
-      const scrollableDistance = Math.max(1, rect.height - window.innerHeight)
-      const sectionHeight = scrollableDistance / (images.length - 1)
-      const index = Math.min(
-        Math.max(0, Math.round(scrollTop / sectionHeight)),
-        images.length - 1,
-      )
-
-        if (index !== currentImageRef.current) {
-          currentImageRef.current = index
-          setCurrentImage(index)
-        }
-      })
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => {
-      window.removeEventListener("scroll", onScroll)
-      if (frameRef.current) {
-        window.cancelAnimationFrame(frameRef.current)
-      }
-    }
-  }, [isDesktop])
+  const entrance = (delay = 0) => ({
+    initial: reduceMotion ? false : { opacity: 0, y: 12 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : delay },
+  })
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-[100svh] lg:h-[400vh] bg-primary-900"
-    >
-      <div className="relative lg:sticky lg:top-0 w-full min-h-[100svh] lg:h-screen overflow-hidden flex items-center justify-center py-28 sm:py-24 lg:py-0">
-        {/* --- BACKGROUND --- */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-accent-500/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px]" />
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
-          <div className="absolute top-1/4 left-1/2 opacity-20 text-accent-400 animate-pulse">
-            <Star size={40} fill="currentColor" />
-          </div>
-        </div>
+    <section className="kellon-hero" aria-labelledby="hero-heading">
+      <div className="kellon-hero__background" aria-hidden="true">
+        <div className="kellon-hero__glow kellon-hero__glow--pink" />
+        <div className="kellon-hero__glow kellon-hero__glow--blue" />
+        <div className="kellon-hero__grid" />
+        <Star className="kellon-hero__star" size={40} fill="currentColor" />
+      </div>
+      <div className="kellon-hero__layout">
+        <motion.div className="kellon-hero__copy" {...entrance()}>
+          <h1 id="hero-heading" className="kellon-hero__heading">
+            <span>Buy stablecoins.</span>{" "}
+            <span className="kellon-hero__accent">Put them to work.</span>
+          </h1>
 
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full z-10">
-          {/* --- LEFT: TEXT --- */}
-          <div className="flex flex-col justify-center h-full pt-10 lg:pt-0">
-            <div className="mb-8">
-              <span className="px-4 py-2 rounded-full border border-accent-500/30 bg-accent-500/10 text-accent-400 text-sm font-bold uppercase tracking-wider">
-                Kellon Mobile
-              </span>
+          <p className="kellon-hero__description">
+            Buy, deposit, and manage USDC or USDT, invest in tokenized stocks, and
+            explore yield opportunities—all from one wallet.
+          </p>
+
+          <div className="kellon-hero__actions">
+            <div className="kellon-hero__buttons">
+              <PlayStoreButton className="kellon-hero__download-button kellon-hero__play-store" />
+              <WebAppButton
+                label="Open web app"
+                className="kellon-hero__download-button kellon-hero__web-app"
+              />
             </div>
-
-            {/* IMPROVED SPACING CONTAINER:
-              1. min-h adjusted to fit max text height without huge gaps.
-              2. justify-end ensures text grows UP, keeping the gap to the paragraph consistent.
-            */}
-            <div className="min-h-[140px] md:min-h-[180px] flex flex-col justify-end mb-6">
-              <AnimatePresence mode="wait">
-                <motion.h1
-                  key={currentHeadline}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="text-4xl xs:text-5xl md:text-7xl font-extrabold font-bungee leading-[1.05] tracking-tight text-white"
-                >
-                  {headlines[currentHeadline]}
-                </motion.h1>
-              </AnimatePresence>
-            </div>
-
-            <p className="text-base xs:text-xl  text-gray-300 leading-relaxed mb-10 max-w-lg">
-              Kellon Mobile empowers you with a non-custodial wallet for
-              borderless payments, tokenized asset management, and global
-              investments - now available in early access on Google Play.
-            </p>
-
-            <div className="relative z-20">
-              <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-stretch sm:justify-start">
-                <PlayStoreButton className="w-full rounded-full px-6 py-4 sm:w-auto sm:px-7" />
-                <DirectApkLink className="w-full rounded-full sm:w-auto" />
-              </div>
-
-              <div className="mt-16 pt-8 border-t border-white/10 hidden sm:block">
-                <p className="text-sm font-semibold text-white uppercase tracking-wider">
-                  One Wallet, More Possibilities
-                </p>
-                <p className="mt-3 flex items-center gap-2 text-sm leading-relaxed text-gray-400">
-                  <span className="flex -space-x-1" aria-label="USDC and USDT">
-                    <img
-                      src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png"
-                      alt="USDC"
-                      className="h-5 w-5 rounded-full border border-primary-900 object-contain"
-                      loading="lazy"
-                    />
-                    <img
-                      src="https://cryptologos.cc/logos/tether-usdt-logo.png"
-                      alt="USDT"
-                      className="h-5 w-5 rounded-full border border-primary-900 object-contain"
-                      loading="lazy"
-                    />
-                  </span>
-                  <span aria-hidden="true">·</span>
-                  <span>Mobile + Web · Payments, Earn & Tokenized Assets</span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* --- RIGHT: MOCKUP --- */}
-          {isDesktop && (
-          <div className="hidden lg:flex items-center justify-center relative h-full">
-            <div className="absolute w-[80%] h-[60%] bg-gradient-to-tr from-accent-500/20 to-primary-500/20 rounded-full blur-[70px] animate-pulse" />
-
-            <div className="relative w-[320px] h-[640px] flex items-center justify-center">
-              {images.map((img, i) => (
-                <motion.img
-                  key={i}
-                  src={img}
-                  alt={`App Screenshot ${i}`}
-                  width="720"
-                  height="1440"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority={i === 0 ? "high" : "auto"}
-                  initial={false}
-                  animate={{
-                    opacity: i === currentImage ? 1 : 0,
-                    scale: i === currentImage ? 1 : 0.95,
-                    y: i === currentImage ? 0 : 32,
-                  }}
-                  transition={{ duration: 0.7, ease: "easeInOut" }}
-                  className="absolute w-full h-auto object-contain drop-shadow-2xl"
-                />
-              ))}
-            </div>
-
-            <motion.div
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute right-8 top-1/3"
-            >
-              <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-xl min-w-[180px]">
-                <div className="text-xs text-gray-400 mb-1">Total Balance</div>
-                <div className="text-xl font-bold text-white mb-3">
-                  $6,255.00
-                </div>
-                <div className="space-y-2 border-t border-white/10 pt-2">
-                  <div className="flex justify-between items-center text-xs">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-blue-400"></div>
-                      <span className="text-gray-300">USDC</span>
-                    </div>
-                    <span className="text-white font-mono">$3,280.50</span>
-                  </div>
-                  <div className="flex justify-between items-center text-xs">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                      <span className="text-gray-300">USDT</span>
-                    </div>
-                    <span className="text-white font-mono">$2,974.50</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                duration: 7,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-              className="absolute left-8 bottom-1/4"
-            >
-              <div className="bg-accent-500 text-black p-4 rounded-2xl shadow-xl flex items-center gap-3">
-                <div className="bg-black/10 p-2 rounded-full">
-                  <Zap size={16} />
-                </div>
-                <div>
-                  <div className="text-xs font-bold opacity-70">
-                    Transfer Sent
-                  </div>
-                  <div className="text-sm font-bold">Instant & Free</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-          )}
-        </div>
-
-        <motion.div
-          className="pointer-events-none absolute bottom-6 left-1/2 z-20 hidden -translate-x-1/2 items-center justify-center lg:flex"
-          aria-label="Scroll to reveal more app screens"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.45 }}
-        >
-          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-white/70 shadow-2xl backdrop-blur-md">
-            <motion.span
-              animate={{ y: [0, 4, 0] }}
-              transition={{
-                duration: 1.6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="grid place-items-center"
-              aria-hidden="true"
-            >
-              <Mouse size={18} strokeWidth={1.8} />
-            </motion.span>
-            <div className="flex gap-1" aria-hidden="true">
-              {images.map((_, i) => (
-                <span
-                  key={i}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === currentImage
-                      ? "w-4 bg-accent-400"
-                      : "w-1.5 bg-white/35"
-                  }`}
-                />
-              ))}
-            </div>
+            <DirectApkLink
+              variant="text"
+              label="Prefer a direct download? Download APK ↓"
+              className="kellon-hero__apk"
+            />
           </div>
         </motion.div>
+        <HeroActivity />
       </div>
     </section>
   )
